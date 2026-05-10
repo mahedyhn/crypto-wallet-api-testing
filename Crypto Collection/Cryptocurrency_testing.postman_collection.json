@@ -1,0 +1,578 @@
+{
+  "info": {
+    "_postman_id": "eaaca47d-f717-4ffd-8051-e2d8b0d892f3",
+    "name": "Cryptocurrency_testing",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "53714777",
+    "_collection_link": "https://go.postman.co/collection/53714777-eaaca47d-f717-4ffd-8051-e2d8b0d892f3?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Register",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "var userName = pm.variables.replaceIn(\"{{$randomUserName}}\");\r",
+              "pm.environment.set('uname',userName);\r",
+              "\r",
+              "\r",
+              "var password = pm.variables.replaceIn(\"{{$randomPassword}}\");\r",
+              "pm.environment.set('pw',password);\r",
+              "\r",
+              "var email = pm.variables.replaceIn(\"{{$randomEmail}}\");\r",
+              "pm.environment.set('email',email);\r",
+              "\r",
+              "\r",
+              "\r",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "var responseBody = pm.response.json();\r",
+              "// Assertion\r",
+              "\r",
+              "pm.test(\"Check the response code 201 or not\",function(){\r",
+              "    pm.expect(pm.response.code).to.eql(201);\r",
+              "})\r",
+              "\r",
+              "pm.test(\"Check the response time 2000 or not\",function(){\r",
+              "    pm.expect(pm.response.responseTime).to.below(2000);\r",
+              "})\r",
+              "\r",
+              "pm.test(\"Check the response Size 2000 or not\",function(){\r",
+              "    pm.expect(pm.response.responseSize).to.below(2000);\r",
+              "})\r",
+              "\r",
+              "\r",
+              "pm.test(\"verify the response data format is json\",function(){\r",
+              "    pm.response.to.have.jsonBody();\r",
+              "})\r",
+              "\r",
+              "\r",
+              "\r",
+              "pm.test(\"Check the username as per the response\", function(){\r",
+              "    pm.expect(pm.environment.get(\"username\")).to.eql(responseBody.uname)\r",
+              "})\r",
+              "\r",
+              "\r",
+              "pm.test(\"verify the password as per the response\", function(){\r",
+              "    pm.expect(pm.environment.get(\"password\")).to.eql(responseBody.pw)\r",
+              "})\r",
+              "\r",
+              "pm.test(\"Check the email as per the response\", function(){\r",
+              "    pm.expect(responseBody.email).to.be.a('string');\r",
+              "})\r",
+              "\r",
+              "\r",
+              "pm.test(\"check the email format \", function(){\r",
+              "    pm.expect(responseBody.email).to.include('@');\r",
+              "})\r",
+              "\r",
+              "\r",
+              "pm.test(\"check the username string or not\", function(){\r",
+              "    pm.expect(responseBody.username).to.be.a('string');\r",
+              "})\r",
+              "\r",
+              "\r",
+              "pm.test(\"Check the username is exists or not\", function(){\r",
+              "    pm.expect(responseBody).to.have.property(\"username\");\r",
+              "})\r",
+              "\r",
+              "\r",
+              "pm.test(\"Check the password is exists or not\", function(){\r",
+              "    pm.expect(responseBody).to.have.property(\"password\");\r",
+              "})\r",
+              "\r",
+              "\r",
+              "pm.test(\"Check the email is exists or not\", function(){\r",
+              "    pm.expect(responseBody).to.have.property(\"email\");\r",
+              "})"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"username\": \"{{uname}}\",\r\n    \"password\": \"{{pw}}\",\r\n    \"email\": \"{{email}}\"\r\n}\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/api/v1/register",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "register"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Login_the_user",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "var responseBody = pm.response.json();\r",
+              "\r",
+              "// Assertion\r",
+              "\r",
+              "pm.test(\"Check the response code 200 or not\",function(){\r",
+              "    pm.expect(pm.response.code).to.eql(200);\r",
+              "})\r",
+              "\r",
+              "pm.test(\"Check the response time 2000 or not\",function(){\r",
+              "    pm.expect(pm.response.responseTime).to.below(2000);\r",
+              "})\r",
+              "\r",
+              "pm.test(\"Check the response Size 2000 or not\",function(){\r",
+              "    pm.expect(pm.response.responseSize).to.below(2000);\r",
+              "})\r",
+              "\r",
+              "\r",
+              "pm.test(\"verify the response data format is json\",function(){\r",
+              "    pm.response.to.have.jsonBody();\r",
+              "})\r",
+              "\r",
+              "pm.test(\"Check the username is exists or not\", function(){\r",
+              "    pm.expect(responseBody).to.have.property(\"username\");\r",
+              "})"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"username\": \"{{uname}}\",\r\n  \"password\": \"{{pw}}\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/api/v1/login",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Retrieve_the_wallet_balance",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "var responseBody = pm.response.json();\r",
+              "// Assertion\r",
+              "\r",
+              "pm.test(\"Check the response code 200 or not\",function(){\r",
+              "    pm.expect(pm.response.code).to.eql(200);\r",
+              "})\r",
+              "\r",
+              "pm.test(\"Check the response time 2000 or not\",function(){\r",
+              "    pm.expect(pm.response.responseTime).to.below(2000);\r",
+              "})\r",
+              "\r",
+              "pm.test(\"Check the response Size 2000 or not\",function(){\r",
+              "    pm.expect(pm.response.responseSize).to.below(2000);\r",
+              "})\r",
+              "\r",
+              "\r",
+              "pm.test(\"verify the response data format is json\",function(){\r",
+              "    pm.response.to.have.jsonBody();\r",
+              "})"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/v1/balance",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "balance"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "List_all_the_transactions",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "var responseBody = pm.response.json();\r",
+              "\r",
+              "// Assertion\r",
+              "pm.test(\"Check the response code 200 or not\",function(){\r",
+              "    pm.expect(pm.response.code).to.eql(200);\r",
+              "})\r",
+              "\r",
+              "pm.test(\"Check the response time 2000 or not\",function(){\r",
+              "    pm.expect(pm.response.responseTime).to.below(2000);\r",
+              "})\r",
+              "\r",
+              "pm.test(\"Check the response Size 2000 or not\",function(){\r",
+              "    pm.expect(pm.response.responseSize).to.below(2000);\r",
+              "})\r",
+              "\r",
+              "\r",
+              "pm.test(\"verify the response data format is json\",function(){\r",
+              "    pm.response.to.have.jsonBody();\r",
+              "})"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/v1/transactions",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "transactions"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Transfer_5_ETH",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "var responseBody = pm.response.json();\r",
+              "\r",
+              "// Assertion\r",
+              "pm.test(\"Check the response code 200 or not\",function(){\r",
+              "    pm.expect(pm.response.code).to.eql(200);\r",
+              "})\r",
+              "\r",
+              "pm.test(\"Check the response time 2000 or not\",function(){\r",
+              "    pm.expect(pm.response.responseTime).to.below(200);\r",
+              "})\r",
+              "\r",
+              "pm.test(\"Check the response Size 2000 or not\",function(){\r",
+              "    pm.expect(pm.response.responseSize).to.below(2000);\r",
+              "})\r",
+              "\r",
+              "\r",
+              "pm.test(\"verify the response data format is json\",function(){\r",
+              "    pm.response.to.have.jsonBody();\r",
+              "})\r",
+              "\r",
+              "pm.test(\"Check the id is exists or not\", function(){\r",
+              "    pm.expect(responseBody).to.have.property(\"id\");\r",
+              "})\r",
+              "\r",
+              "pm.test(\"Check the to_address is exists or not\", function(){\r",
+              "    pm.expect(responseBody).to.have.property(\"to_address\");\r",
+              "})\r",
+              "\r",
+              "pm.test(\"Check the type is exists or not\", function(){\r",
+              "    pm.expect(responseBody).to.have.property(\"type\");\r",
+              "})\r",
+              "\r",
+              "pm.test(\"Check type is debit\", function(){\r",
+              "    pm.expect(responseBody.type).to.eql(\"debit\");\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Check the amount is exists or not\", function(){\r",
+              "    pm.expect(responseBody).to.have.property(\"amount\");\r",
+              "})\r",
+              "\r",
+              "pm.test(\"Check amount is a number\", function(){\r",
+              "    pm.expect(responseBody.amount).to.be.a(\"number\");\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Check the currency is exists or not\", function(){\r",
+              "    pm.expect(responseBody).to.have.property(\"currency\");\r",
+              "})\r",
+              "\r",
+              "pm.test(\"Check currency is ETH\", function(){\r",
+              "    pm.expect(responseBody.currency).to.eql(\"ETH\");\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Check the timestamp is exists or not\", function(){\r",
+              "    pm.expect(responseBody).to.have.property(\"timestamp\");\r",
+              "})\r",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        },
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "var recipient_address = pm.variables.replaceIn(\"{{$randomUUID}}\");\r",
+              "pm.environment.set('raddress',recipient_address);\r",
+              "\r",
+              "\r",
+              "var amount = pm.variables.replaceIn(\"{{$randomInt}}\");\r",
+              "pm.environment.set('amount',amount);\r",
+              "\r",
+              "// var currency = pm.variables.replaceIn(\"{{$randomEmail}}\");\r",
+              "// pm.environment.set('currency',currency);\r",
+              "\r",
+              "const cryptos = [\"BTC\", \"ETH\", \"SOL\", \"ADA\", \"DOT\"];\r",
+              "const currency = cryptos[Math.floor(Math.random() * cryptos.length)];\r",
+              "pm.environment.set(\"currency\", currency);\r",
+              "\r",
+              "\r",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"recipient_address\": \"{{raddress}}\",\r\n  \"amount\": {{amount}},\r\n  \"currency\": \"{{currency}}\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/api/v1/transactions",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "transactions"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Calculate_transaction_fees",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "var responseBody = pm.response.json();\r",
+              "\r",
+              "// Assertion\r",
+              "pm.test(\"Check the response code 200 or not\",function(){\r",
+              "    pm.expect(pm.response.code).to.eql(200);\r",
+              "})\r",
+              "\r",
+              "pm.test(\"Check the response time 2000 or not\",function(){\r",
+              "    pm.expect(pm.response.responseTime).to.below(2000);\r",
+              "})\r",
+              "\r",
+              "pm.test(\"Check the response Size 2000 or not\",function(){\r",
+              "    pm.expect(pm.response.responseSize).to.below(2000);\r",
+              "})\r",
+              "\r",
+              "\r",
+              "pm.test(\"verify the response data format is json\",function(){\r",
+              "    pm.response.to.have.jsonBody();\r",
+              "})\r",
+              "\r",
+              "pm.test(\"Check the fee is exists or not\", function(){\r",
+              "    pm.expect(responseBody).to.have.property(\"fee\");\r",
+              "})\r",
+              "\r",
+              "pm.test(\"Check the currency is exists or not\", function(){\r",
+              "    pm.expect(responseBody).to.have.property(\"currency\");\r",
+              "})"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"amount\": 2.5,\r\n  \"currency\": \"BTC\",\r\n  \"recipient_address\": \"0x1234567890ABCDEF\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/api/v1/transaction_fee",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "transaction_fee"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "currency_exchange_rates",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "var responseBody = pm.response.json();\r",
+              "\r",
+              "// Assertion\r",
+              "pm.test(\"Check the response code 200 or not\",function(){\r",
+              "    pm.expect(pm.response.code).to.eql(200);\r",
+              "})\r",
+              "\r",
+              "pm.test(\"Check the response time 2000 or not\",function(){\r",
+              "    pm.expect(pm.response.responseTime).to.below(200);\r",
+              "})\r",
+              "\r",
+              "pm.test(\"Check the response Size 2000 or not\",function(){\r",
+              "    pm.expect(pm.response.responseSize).to.below(2000);\r",
+              "})\r",
+              "\r",
+              "\r",
+              "pm.test(\"verify the response data format is json\",function(){\r",
+              "    pm.response.to.have.jsonBody();\r",
+              "})"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/v1/exchange_rates",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "exchange_rates"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
