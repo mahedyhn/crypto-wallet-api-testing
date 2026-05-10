@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="https://readme-typing-svg.demolab.com?font=Orbitron&size=32&duration=3000&pause=1000&color=F7A800&center=true&vCenter=true&width=700&lines=🪙+Cryptocurrency+Wallet+API;API+Testing+with+Postman+%26+Newman" alt="Typing SVG" />
+<!-- <img src="https://readme-typing-svg.demolab.com?font=Orbitron&size=32&duration=3000&pause=1000&color=F7A800&center=true&vCenter=true&width=700&lines=🪙+Cryptocurrency+Wallet+API;API+Testing+with+Postman+%26+Newman" alt="Typing SVG" /> -->
 
 <br/>
 
@@ -328,6 +328,6 @@ open ./reports/test-report.html
 
 **Made with ❤️ | API Testing | Postman × Newman**
 
-*Cryptocurrency Wallet API — Test Suite v1.0.0*
+*MD Mahedy hasan Naiem, SQA Engineer*
 
 </div>
